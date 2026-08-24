@@ -1,10 +1,28 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
-import { BrainCircuit, Upload, FileText, Volume2, VolumeX, Globe } from "lucide-react";
+import {
+  BrainCircuit,
+  Upload,
+  FileText,
+  Volume2,
+  VolumeX,
+  Globe,
+  LayoutDashboard,
+  LogOut,
+  User,
+  Stethoscope
+} from "lucide-react";
 import { toggleSound, isSoundEnabled, playClick } from "../lib/sound";
 import { useLanguage } from "../lib/i18n";
+import { DoctorUser } from "./Login";
 
-export const Navbar = () => {
+interface NavbarProps {
+  onNavigate?: (page: "home" | "login" | "dashboard") => void;
+  doctor?: DoctorUser | null;
+  onLogout?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onNavigate, doctor, onLogout }) => {
   const [soundOn, setSoundOn] = useState(isSoundEnabled());
   const { language, setLanguage, t } = useLanguage();
 
@@ -14,9 +32,12 @@ export const Navbar = () => {
     if (next) playClick();
   };
 
-  const toggleLanguage = () => {
+  const handleMriClick = (e: React.MouseEvent) => {
     playClick();
-    setLanguage(language === 'th' ? 'en' : 'th');
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(doctor ? "dashboard" : "login");
+    }
   };
 
   return (
@@ -28,9 +49,15 @@ export const Navbar = () => {
         className="pointer-events-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 shadow-[0_12px_40px_rgba(15,23,42,0.08)] rounded-full w-full max-w-7xl px-2.5 sm:px-4 md:px-5 py-1.5 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-2"
       >
         {/* Brand & Badge */}
-        <a 
-          href="#home" 
-          onClick={playClick}
+        <a
+          href="#home"
+          onClick={(e) => {
+            playClick();
+            if (onNavigate) {
+              e.preventDefault();
+              onNavigate("home");
+            }
+          }}
           className="flex items-center gap-2 sm:gap-2.5 group px-1 sm:px-2 min-w-0 shrink"
         >
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-tr from-slate-950 via-indigo-950 to-blue-900 flex items-center justify-center text-white shadow-md shadow-blue-950/20 group-hover:scale-105 transition-transform duration-300 border border-white/10 shrink-0">
@@ -38,11 +65,13 @@ export const Navbar = () => {
           </div>
           <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-1 sm:gap-1.5">
-              <span className="text-[13px] sm:text-[15px] font-black text-slate-900 tracking-tight leading-none">BladderAI</span>
+              <span className="text-[13px] sm:text-[15px] font-black text-slate-900 tracking-tight leading-none">
+                BladderAI
+              </span>
               <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             </div>
             <span className="text-[7.5px] sm:text-[9px] font-extrabold text-blue-700 tracking-widest uppercase mt-0.5 truncate max-w-[110px] xs:max-w-[150px] sm:max-w-none">
-              {language === 'th' ? 'YOLOv11 + ResNet ระบบวินิจฉัย' : 'Precision MRI Staging'}
+              {language === "th" ? "YOLOv11 + ResNet ระบบวินิจฉัย" : "Precision MRI Staging"}
             </span>
           </div>
         </a>
@@ -52,7 +81,6 @@ export const Navbar = () => {
           {[
             { name: t("navHero"), href: "#overview" },
             { name: t("navTNM"), href: "#staging" },
-            { name: t("navDetector"), href: "#prediction" },
             { name: t("navSupervisors"), href: "#supervisors" },
           ].map((item) => (
             <a
@@ -73,15 +101,15 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => {
-                if (language !== 'th') {
+                if (language !== "th") {
                   playClick();
-                  setLanguage('th');
+                  setLanguage("th");
                 }
               }}
               className={`px-1.5 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black transition-all duration-200 flex items-center gap-0.5 sm:gap-1 ${
-                language === 'th'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30'
-                  : 'text-slate-600 hover:text-slate-900'
+                language === "th"
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/30"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               <span>🇹🇭 TH</span>
@@ -89,15 +117,15 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => {
-                if (language !== 'en') {
+                if (language !== "en") {
                   playClick();
-                  setLanguage('en');
+                  setLanguage("en");
                 }
               }}
               className={`px-1.5 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black transition-all duration-200 flex items-center gap-0.5 sm:gap-1 ${
-                language === 'en'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30'
-                  : 'text-slate-600 hover:text-slate-900'
+                language === "en"
+                  ? "bg-blue-600 text-white shadow-md shadow-blue-500/30"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               <span>🇬🇧 EN</span>
@@ -115,7 +143,11 @@ export const Navbar = () => {
             }`}
             title={soundOn ? t("soundOn") : t("soundOff")}
           >
-            {soundOn ? <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
+            {soundOn ? (
+              <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            ) : (
+              <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            )}
           </button>
 
           <a
@@ -123,21 +155,52 @@ export const Navbar = () => {
             target="_blank"
             rel="noreferrer"
             onClick={playClick}
-            className="hidden md:inline-flex items-center gap-1.5 text-[12px] font-bold text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-full border border-slate-200 hover:border-slate-300 hover:bg-white transition-all shadow-sm whitespace-nowrap"
+            className="hidden xl:inline-flex items-center gap-1.5 text-[12px] font-bold text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-full border border-slate-200 hover:border-slate-300 hover:bg-white transition-all shadow-sm whitespace-nowrap"
           >
             <FileText className="w-3.5 h-3.5 text-blue-600" />
             <span>MDPI Paper</span>
           </a>
 
-          <a
-            href="#prediction"
-            onClick={playClick}
-            className="inline-flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[10.5px] sm:text-[12px] font-bold uppercase tracking-wider px-2.5 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35 transition-all duration-300 active:scale-95 border border-white/20 shrink-0 whitespace-nowrap"
-          >
-            <Upload className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            <span className="hidden sm:inline">{language === 'th' ? 'วิเคราะห์ MRI' : 'Upload MRI'}</span>
-            <span className="sm:hidden">MRI</span>
-          </a>
+          {/* If Doctor logged in -> show Workstation link & Logout, else show Login/Upload MRI */}
+          {doctor ? (
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  onNavigate?.("dashboard");
+                }}
+                className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[10.5px] sm:text-[12px] font-bold px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-full shadow-lg shadow-blue-600/25 transition-all active:scale-95 border border-white/20 whitespace-nowrap"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>Dashboard</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  onLogout?.();
+                }}
+                className="p-1.5 sm:p-2 rounded-full border border-slate-200 text-rose-500 hover:bg-rose-50 transition-all"
+                title="Sign out"
+              >
+                <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleMriClick}
+              className="inline-flex items-center gap-1 sm:gap-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[10.5px] sm:text-[12px] font-bold uppercase tracking-wider px-2.5 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35 transition-all duration-300 active:scale-95 border border-white/20 shrink-0 whitespace-nowrap"
+            >
+              <Upload className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              <span className="hidden sm:inline">
+                {language === "th" ? "วิเคราะห์ MRI (เข้าสู่ระบบแพทย์)" : "Doctor Portal"}
+              </span>
+              <span className="sm:hidden">Login</span>
+            </button>
+          )}
         </div>
       </motion.nav>
     </div>

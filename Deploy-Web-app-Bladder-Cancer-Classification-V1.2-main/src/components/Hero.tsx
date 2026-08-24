@@ -6,7 +6,11 @@ import { ArrowRight, Sparkles, ShieldCheck, Layers, Activity, Eye, RotateCw, Che
 import { playClick } from "../lib/sound";
 import { useLanguage } from "../lib/i18n";
 
-export const Hero = () => {
+interface HeroProps {
+  onStartDiagnosis?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onStartDiagnosis }) => {
   const { language, t } = useLanguage();
 
   return (
@@ -59,7 +63,13 @@ export const Hero = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 mb-8 sm:mb-10 w-full sm:w-auto">
             <a
               href="#prediction"
-              onClick={playClick}
+              onClick={(e) => {
+                playClick();
+                if (onStartDiagnosis) {
+                  e.preventDefault();
+                  onStartDiagnosis();
+                }
+              }}
               className="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[13px] sm:text-[14px] font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-600/35 transition-all duration-300 active:scale-95 border border-white/20 whitespace-nowrap text-center"
             >
               <span>{t("heroCtaStart")}</span>

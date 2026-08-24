@@ -344,6 +344,156 @@ export const translations: TranslationDictionary = {
   footerRights: {
     th: "สงวนลิขสิทธิ์ พ.ศ. 2569 โครงการวิจัยระบบ AI จำแนกระยะมะเร็งกระเพาะปัสสาวะ มหาวิทยาลัยพะเยา",
     en: "© 2026 Bladder Cancer AI Research Initiative. All rights reserved."
+  },
+
+  // Doctor Login Portal
+  loginTitle: {
+    th: "ระบบเข้าสู่ระบบแพทย์และผู้เชี่ยวชาญ",
+    en: "Physician & Specialist Clinical Portal"
+  },
+  loginSubtitle: {
+    th: "BladderAI Medical Workstation • ระบบสนับสนุนการตัดสินใจทางคลินิก",
+    en: "BladderAI Medical Workstation • Clinical Decision Support System"
+  },
+  loginDoctorID: {
+    th: "รหัสประจำตัวแพทย์ (Doctor ID / Username)",
+    en: "Doctor ID / Username"
+  },
+  loginPassword: {
+    th: "รหัสผ่าน (Password)",
+    en: "Password"
+  },
+  loginHospital: {
+    th: "หน่วยงาน / โรงพยาบาล",
+    en: "Department / Hospital Center"
+  },
+  loginBtn: {
+    th: "เข้าสู่ระบบเวิร์กสเตชัน",
+    en: "Sign In to Medical Workstation"
+  },
+  loginDemoBtn: {
+    th: "เข้าใช้งานด้วยบัญชีแพทย์ทดสอบ (1-Click Demo)",
+    en: "1-Click Demo Sign In (admin)"
+  },
+  loginBackHome: {
+    th: "กลับสู่หน้าหลัก",
+    en: "Back to Home Overview"
+  },
+  loginSecureNote: {
+    th: "ระบบเชื่อมต่อผ่านการเข้ารหัส 256-Bit SSL และสอดคล้องตามมาตรฐานความปลอดภัยข้อมูลสุขภาพ HIPAA",
+    en: "Protected with 256-Bit SSL encryption & compliant with HIPAA healthcare data standards"
+  },
+
+  // Dashboard & Navigation
+  dashWorkstation: {
+    th: "ศูนย์ปฏิบัติการวินิจฉัยมะเร็งกระเพาะปัสสาวะ",
+    en: "BladderAI Medical Workstation"
+  },
+  dashTabAnalysis: {
+    th: "วิเคราะห์ภาพ MRI",
+    en: "MRI Scan Analysis"
+  },
+  dashTabComparison: {
+    th: "เปรียบเทียบการวินิจฉัย",
+    en: "Diagnosis Comparison"
+  },
+  dashTabAtlas: {
+    th: "แบบจำลอง 3 มิติ & กายวิภาค",
+    en: "3D Staging & Atlas"
+  },
+  dashOnlineStatus: {
+    th: "โมเดล AI (YOLOv11+ResNet) พร้อมใช้งาน",
+    en: "AI Engine Online (YOLOv11+ResNet)"
+  },
+  dashDoctorRole: {
+    th: "แพทย์ผู้เชี่ยวชาญระบบทางเดินปัสสาวะ",
+    en: "Urologist & Clinical Oncologist"
+  },
+  dashHospitalName: {
+    th: "ศูนย์การแพทย์มหาวิทยาลัยพะเยา",
+    en: "University of Phayao Medical Center"
+  },
+  dashSignOut: {
+    th: "ออกจากระบบแพทย์",
+    en: "Sign Out"
+  },
+
+  // Diagnosis Comparison Module
+  compHeaderTitle: {
+    th: "ระบบเปรียบเทียบผลการวินิจฉัย MRI ติดตามระยะโรค",
+    en: "Longitudinal MRI Staging & Progression Comparison"
+  },
+  compHeaderSubtitle: {
+    th: "เปรียบเทียบภาพถ่าย MRI ครั้งก่อนหน้ากับครั้งปัจจุบัน เพื่อประเมินการเปลี่ยนแปลงของระยะ TNM, การลุกลามชั้นกล้ามเนื้อ และการตอบสนองต่อการรักษา",
+    en: "Compare baseline and follow-up MRI scans to quantify tumor trajectory, detrusor muscle invasion, and therapeutic response"
+  },
+  compPresetCases: {
+    th: "เลือกชุดเคสตัวอย่างทางคลินิก:",
+    en: "Select Clinical Case Study:"
+  },
+  compPreviousScan: {
+    th: "การวินิจฉัยครั้งก่อน (Previous / Baseline Scan)",
+    en: "Previous / Baseline Diagnostic Scan"
+  },
+  compCurrentScan: {
+    th: "การวินิจฉัยครั้งปัจจุบัน (Current / Follow-up Scan)",
+    en: "Current / Follow-up Diagnostic Scan"
+  },
+  compExamDate: {
+    th: "วันที่ตรวจ MRI",
+    en: "Scan Date"
+  },
+  compTnmStage: {
+    th: "ระยะ TNM",
+    en: "TNM Stage"
+  },
+  compViradsScore: {
+    th: "คะแนน VI-RADS",
+    en: "VI-RADS Score"
+  },
+  compMuscleStatus: {
+    th: "สถานะชั้นกล้ามเนื้อ (Detrusor)",
+    en: "Detrusor Muscle Status"
+  },
+  compLesionSize: {
+    th: "ขนาดรอยโรค (Lesion Dimension)",
+    en: "Lesion Dimension"
+  },
+  compSummaryHeader: {
+    th: "สรุปการประเมินการเปลี่ยนแปลงทางคลินิก (Progression Trajectory)",
+    en: "Clinical Progression & Trajectory Assessment"
+  },
+  compStatusProgression: {
+    th: "มีการลุกลามของโรคเพิ่มขึ้น (Disease Progression)",
+    en: "Disease Progression (Advancing Stage)"
+  },
+  compStatusRegression: {
+    th: "ตอบสนองต่อการรักษา ก้อนเนื้อยุบตัว (Tumor Regression)",
+    en: "Tumor Regression (Treatment Response)"
+  },
+  compStatusStable: {
+    th: "รอยโรคคงที่ ไม่พบการเปลี่ยนแปลงชัดเจน (Stable Disease)",
+    en: "Stable Disease (No Significant Change)"
+  },
+  compViewSideBySide: {
+    th: "แสดงคู่กัน (Side-by-Side)",
+    en: "Side-by-Side View"
+  },
+  compViewSplitSlider: {
+    th: "สไลเดอร์เปรียบเทียบ (Split-Slider Diff)",
+    en: "Split-Slider Diff"
+  },
+  compViewHeatmap: {
+    th: "แผนที่ความต่าง (Delta Heatmap)",
+    en: "Delta Heatmap"
+  },
+  compClinicalAdvice: {
+    th: "ข้อเสนอแนะทางคลินิกและแผนการดูแลรักษา (Clinical Guidance)",
+    en: "Clinical Guidance & Multidisciplinary Action Plan"
+  },
+  compExportReport: {
+    th: "พิมพ์รายงานเปรียบเทียบทางการแพทย์",
+    en: "Export Comparison Report"
   }
 };
 
