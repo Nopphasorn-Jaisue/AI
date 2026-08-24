@@ -1,0 +1,6 @@
+{
+  "name": "Bladder Cancer Detection System",
+  "description": "AI-powered MRI staging system for bladder cancer detection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
