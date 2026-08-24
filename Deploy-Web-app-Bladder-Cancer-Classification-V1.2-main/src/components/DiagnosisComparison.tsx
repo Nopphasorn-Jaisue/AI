@@ -423,7 +423,7 @@ export const DiagnosisComparison: React.FC = () => {
                   key={item.id}
                   type="button"
                   onClick={() => {
-                    playStageSelect();
+                    playStageSelect(item.curr.stage);
                     setSelectedCaseId(item.id);
                     setIsCustomMode(false);
                   }}

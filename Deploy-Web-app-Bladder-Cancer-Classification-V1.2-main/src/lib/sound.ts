@@ -51,7 +51,7 @@ export const playClick = () => {
   }
 };
 
-export const playStageSelect = (stage: string) => {
+export const playStageSelect = (stage?: string) => {
   if (!soundEnabled) return;
   try {
     const ctx = getAudioContext();
